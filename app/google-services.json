@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "410343517793",
+    "project_id": "artibe-7b1a9",
+    "storage_bucket": "artibe-7b1a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410343517793:android:7c2a44ccd334ba97008420",
+        "android_client_info": {
+          "package_name": "com.example.artibe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410343517793-kclu6de1uqbjr382ad4vibirefut4gp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.artibe",
+            "certificate_hash": "b4d9da1299e0aec44d6b571944809cc89085b783"
+          }
+        },
+        {
+          "client_id": "410343517793-ic35plqag0dmr2sc2luf8qtpgcj6nlgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-B-gy07_pBibjkTxtd0ZPxwmFYxFyzbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410343517793-ic35plqag0dmr2sc2luf8qtpgcj6nlgj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

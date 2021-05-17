@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_buscar"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Buscar"/>
+    <item
+        android:id="@+id/fragment_menu"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:title="Home"/>
+    <item
+        android:id="@+id/fragment_tienda"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:title="Store"/>
+</menu>
