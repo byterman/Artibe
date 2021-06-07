@@ -40,6 +40,9 @@ public class fragment_menu extends Fragment {
 
     protected ArrayList<Post> posts;
     int contador;
+
+    public View viewMenu;
+
     public fragment_menu() {
         // Required empty public constructor
     }
@@ -50,28 +53,21 @@ public class fragment_menu extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View viewMenu = inflater.inflate(R.layout.fragment_menu, container, false);
+        viewMenu = inflater.inflate(R.layout.fragment_menu, container, false);
         contador=0;
+
+        posts = new ArrayList<Post>();
 
         // ______________QUERY__________
         db = FirebaseDatabase.getInstance().getReference("post");
 
         db.addListenerForSingleValueEvent(valueEventListener);
 
-        // se declara el recycle view
-        menugeneral=viewMenu.findViewById(R.id.recycle_mainmenu);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
-        menugeneral.setLayoutManager(linearLayoutManager);
-        menugeneral.setAdapter(new AdaptadorMainMenuFavoritas() );
-
-        posts = new ArrayList<Post>();
 
 
 
@@ -102,13 +98,23 @@ public class fragment_menu extends Fragment {
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             //posts.clear();
             if (snapshot.exists()){
+                int count = 0;
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     Post post = snapshot1.getValue(Post.class);
                     posts.add(post);
                     Log.e("soyunlog","tamaño de posts"+posts.size());
-                    Log.e("soyunlog","tipo"+posts.get(0).tipoblog);
+                    Log.e("soyunlog","tipo"+posts.get(count).tipoblog);
+                    count ++;
                 }
                 //menugeneral.notifyDataSetChanged();
+
+                Log.e("soyunlog", "---> " + posts.size());
+                menugeneral= viewMenu.findViewById(R.id.recycle_mainmenu);
+                menugeneral.setAdapter(new AdaptadorMainMenuFavoritas());
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+                menugeneral.setLayoutManager(linearLayoutManager);
+
             }
         }
 
@@ -125,36 +131,44 @@ public class fragment_menu extends Fragment {
     // __________________________________________________________________
 
     private class AdaptadorMainMenuFavoritas extends RecyclerView.Adapter<AdaptadorMainMenuFavoritas.AdaptadorMainMenuHolder> {
+
+        public int position;
+        public int contador = 0;
+
         @NonNull
         @Override
         public AdaptadorMainMenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             Log.e("soyunlog","test");
-            if(posts.get(contador).tipoblog==1){
 
-
-
-                contador++;
-
+            if(posts.get(contador).getTipoblog()==1){
+                Log.e("soyunlog", "HELLOOOO SOY ITM TEXT " + posts.get(contador).tipoblog);
                 Log.e("soyunlog","tamaño de contador"+contador);
+
+                contador ++;
+
+
                 return new AdaptadorMainMenuHolder(getLayoutInflater().inflate(R.layout.item_text,parent,false));
-            }else if (posts.get(contador).tipoblog==2){
-                contador++;
 
-                Log.e("soyunlog","tamaño de contador"+contador);
+            }else if (posts.get(contador).getTipoblog()==2){
+                Log.e("soyunlog", "HELLOOOO SOY ITM IMG " + posts.get(contador).tipoblog);
+                Log.e("soyunlog","tamaño de contador "+contador);
+
+                contador ++;
+
+
                 return new AdaptadorMainMenuHolder(getLayoutInflater().inflate(R.layout.item_img,parent,false));
+
             }else{
-                contador++;
-
-
+                Log.e("soyunlog", "HELLOOOO SOY ITM video  " + posts.get(contador).tipoblog);
                 Log.e("soyunlog","tamaño de contador"+contador);
+
+                contador ++;
                 return new AdaptadorMainMenuHolder(getLayoutInflater().inflate(R.layout.item_video,parent,false));
             }
-
         }
 
         @Override
         public void onBindViewHolder(@NonNull AdaptadorMainMenuHolder holder, int position) {
-
             holder.imprimit(position);
             holder.layoutid.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -171,7 +185,6 @@ public class fragment_menu extends Fragment {
         }
 
         private class AdaptadorMainMenuHolder extends RecyclerView.ViewHolder {
-
 
             TextView texto,userid;
             ImageView profile,img;
@@ -191,16 +204,19 @@ public class fragment_menu extends Fragment {
 
 
             public void imprimit(int position) {
+                Log.e("soyunlog", "---------------_> " + position);
                 if(posts.get(position).tipoblog==1){
-                    userid.setText(posts.get(contador).nomusuario);
-                    texto.setText(posts.get(contador).texto);
+                    userid.setText(posts.get(position).nomusuario);
+                    texto.setText(posts.get(position).texto);
 
                 }else if(posts.get(position).tipoblog==2){
-                    userid.setText(posts.get(contador).nomusuario);
-                    Picasso.get().load(posts.get(contador).urlimg).into(img);
+                    userid.setText(posts.get(position).nomusuario);
+                    Picasso.get().load(posts.get(position).urlimg).into(img);
                 }else{
 
                 }
+
+                //"https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/Fotos_subidas%2Fls2897cb2282pedro%20pedrocomprimido.jpg?alt=media&token=b205a56e-657d-4aae-b0f0-d57ba600835b"
             }
         }
     }
