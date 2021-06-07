@@ -118,7 +118,7 @@ public class login extends AppCompatActivity {
 
 
     public void goTo(){
-        Intent intent = new Intent(this, inicio.class);
+        Intent intent = new Intent(this, inicioMAL.class);
         startActivity(intent);
     }
 }

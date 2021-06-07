@@ -18,7 +18,6 @@ import com.example.artibe.inicio;
 public class seleccionBlog extends AppCompatActivity
 {
 
-
     ImageButton imgText,imgVideo,imgImg;
 
 
@@ -39,14 +38,6 @@ public class seleccionBlog extends AppCompatActivity
                 goToIMG();
             }
         });
-
-        imgText.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                goToText();
-            }
-        });
-
-
 
         imgText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
