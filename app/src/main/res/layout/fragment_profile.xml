@@ -15,7 +15,7 @@
         android:background="@color/black_veryDark">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/profile1"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:layout_marginTop="28dp"
@@ -35,8 +35,8 @@
             android:text="TextView"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+            app:layout_constraintStart_toStartOf="@+id/profile1"
+            app:layout_constraintTop_toBottomOf="@+id/profile1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

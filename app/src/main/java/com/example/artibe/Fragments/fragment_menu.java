@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,11 +22,16 @@ import android.widget.Toast;
 import com.example.artibe.R;
 import com.example.artibe.crear.seleccionBlog;
 import com.example.artibe.objetos.Post;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -37,6 +43,11 @@ public class fragment_menu extends Fragment {
     private ImageButton anadir;
 
     RecyclerView menugeneral;
+
+
+    TextView username;
+    private FirebaseAuth mAuth;
+    profile fragmentprofile = new profile();
 
     protected ArrayList<Post> posts;
     int contador;
@@ -62,6 +73,16 @@ public class fragment_menu extends Fragment {
         contador=0;
 
         posts = new ArrayList<Post>();
+        username = viewMenu.findViewById(R.id.username2);
+
+
+        //=======PARA EL PERFIL DE ARRIBA==========
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        username.setText(currentUser.getDisplayName().toString());
+
+        //=============================
 
         // ______________QUERY__________
         db = FirebaseDatabase.getInstance().getReference("post");
@@ -72,7 +93,27 @@ public class fragment_menu extends Fragment {
 
 
 
+
+
+        /// ESTO ESTA PUESTO COMO PLACEHOLDER, HAY QUE CAMBIARLO
+        ImageView profile = viewMenu.findViewById(R.id.profileIMG2);
+        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/avatar.png?alt=media&token=f46f16c2-57e1-4f6b-9134-2636ec348bee").into(profile);
+        ///--------------------------------------------
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                goToprofile(fragmentprofile);
+                Toast toast = Toast.makeText(getContext(), "Mensaje 2", Toast.LENGTH_SHORT);
+                toast.show();
+                // Code here executes on main thread after user presses button
+            }
+        });
+
         ImageButton anadir = viewMenu.findViewById(R.id.imageView2);
+
+
+
 
         anadir.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -85,9 +126,16 @@ public class fragment_menu extends Fragment {
         // Inflate the layout for this fragment
         return viewMenu;
     }
+
     public void goTo() {
         Intent intent = new Intent(getContext(), seleccionBlog.class);
         startActivity(intent);
+    }
+
+    public void goToprofile(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_general, fragment);
+        transaction.commit();
     }
 
 
@@ -189,7 +237,7 @@ public class fragment_menu extends Fragment {
             TextView texto,userid;
             ImageView profile,img;
             View layoutid;
-
+            YouTubePlayerView youtube;
 
             public AdaptadorMainMenuHolder(@NonNull View itemView) {
                 super(itemView);
@@ -197,7 +245,7 @@ public class fragment_menu extends Fragment {
                 userid = itemView.findViewById(R.id.UserId);
                 profile = itemView.findViewById(R.id.profile);
                 img = itemView.findViewById(R.id.image);
-
+                youtube = itemView.findViewById(R.id.youtube_player_view);
                 layoutid = itemView.findViewById(R.id.layoutidd);
 
             }
@@ -213,7 +261,14 @@ public class fragment_menu extends Fragment {
                     userid.setText(posts.get(position).nomusuario);
                     Picasso.get().load(posts.get(position).urlimg).into(img);
                 }else{
-
+                    userid.setText(posts.get(position).nomusuario);
+                    youtube.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                        @Override
+                        public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                            String videoId = posts.get(position).url;
+                            youTubePlayer.loadVideo(videoId, 0);
+                        }
+                    });
                 }
 
                 //"https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/Fotos_subidas%2Fls2897cb2282pedro%20pedrocomprimido.jpg?alt=media&token=b205a56e-657d-4aae-b0f0-d57ba600835b"

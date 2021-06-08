@@ -35,21 +35,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="8dp"
+            android:text="https://www.youtube.com/watch?v="
+            android:textColor="@color/white"
+            app:layout_constraintBaseline_toBaselineOf="@+id/EditUrl"
+            app:layout_constraintEnd_toStartOf="@+id/EditUrl"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <EditText
             android:id="@+id/EditUrl"
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="202dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="18dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="211dp"
+            android:layout_marginEnd="7dp"
             android:background="@color/black_default"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name"
-            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button

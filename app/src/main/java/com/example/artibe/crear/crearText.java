@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.example.artibe.R;
 import com.example.artibe.inicio;
+import com.example.artibe.inicioMAL;
 import com.example.artibe.objetos.Post;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -87,7 +88,7 @@ public class crearText extends AppCompatActivity {
     }
 
     public void goToBack() {
-        Intent intent = new Intent(this, inicio.class);
+        Intent intent = new Intent(this, inicioMAL.class);
         startActivity(intent);
     }
 

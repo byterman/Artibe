@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import com.example.artibe.R;
 import com.example.artibe.inicio;
+import com.example.artibe.inicioMAL;
 import com.example.artibe.objetos.Post;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -213,6 +214,8 @@ public class crearIMG extends AppCompatActivity {
                                 posts.add(post);
 
                                 imgref.setValue(posts);
+
+                                goToBack();
                             }
                         });
 
@@ -223,7 +226,7 @@ public class crearIMG extends AppCompatActivity {
 
                         imgref.setValue(posts);
                         */
-                        //goToBack();
+                        //
                     }
                 });
             }
@@ -233,7 +236,7 @@ public class crearIMG extends AppCompatActivity {
     }
 
     public void goToBack() {
-        Intent intent = new Intent(this, inicio.class);
+        Intent intent = new Intent(this, inicioMAL.class);
         startActivity(intent);
     }
 
