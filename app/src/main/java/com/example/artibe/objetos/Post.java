@@ -7,18 +7,19 @@ public class Post {
     public String urlimg;
     public String nomusuario;
     public String emailusuario;
-
+    public String id;
     public Post(){
 
     }
 
-    public Post(int tipoblog, String texto, String url,String urlimg,String nomusuario, String emailusuario){
+    public Post(int tipoblog, String texto, String url,String urlimg,String nomusuario, String emailusuario,String id){
         this.tipoblog = tipoblog;
         this.texto = texto;
         this.url = url;
         this.urlimg = urlimg;
         this.nomusuario = nomusuario;
         this.emailusuario = emailusuario;
+        this.id = id;
     }
 
     public int getTipoblog(){ return tipoblog; }

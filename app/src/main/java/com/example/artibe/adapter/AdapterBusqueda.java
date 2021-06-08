@@ -100,13 +100,16 @@ public class AdapterBusqueda extends RecyclerView.Adapter<AdapterBusqueda.viewho
 
         public void imprimit(int position) {
             if(postbusqueda.get(position).tipoblog==1){
+                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/avatar.png?alt=media&token=f46f16c2-57e1-4f6b-9134-2636ec348bee").into(profile);
                 userid.setText(postbusqueda.get(position).nomusuario);
                 texto.setText(postbusqueda.get(position).texto);
 
             }else if(postbusqueda.get(position).tipoblog==2){
+                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/avatar.png?alt=media&token=f46f16c2-57e1-4f6b-9134-2636ec348bee").into(profile);
                 userid.setText(postbusqueda.get(position).nomusuario);
                 Picasso.get().load(postbusqueda.get(position).urlimg).into(img);
             }else{
+                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/avatar.png?alt=media&token=f46f16c2-57e1-4f6b-9134-2636ec348bee").into(profile);
                 userid.setText(postbusqueda.get(position).nomusuario);
                 youtube.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
                     @Override

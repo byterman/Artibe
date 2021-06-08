@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.artibe.R;
@@ -18,7 +19,7 @@ import com.example.artibe.inicio;
 public class seleccionBlog extends AppCompatActivity
 {
 
-    ImageButton imgText,imgVideo,imgImg;
+    ImageView imgText,imgVideo,imgImg;
 
 
 

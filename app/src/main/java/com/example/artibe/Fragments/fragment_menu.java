@@ -44,10 +44,14 @@ public class fragment_menu extends Fragment {
 
     RecyclerView menugeneral;
 
+    public static String posicionamiento;
 
     TextView username;
     private FirebaseAuth mAuth;
     profile fragmentprofile = new profile();
+
+
+    fragment_IMGpreview fragmentIMG = new fragment_IMGpreview();
 
     protected ArrayList<Post> posts;
     int contador;
@@ -215,15 +219,33 @@ public class fragment_menu extends Fragment {
             }
         }
 
+        public void goToImg(Fragment fragment) {
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_general, fragment);
+            transaction.commit();
+        }
+
         @Override
         public void onBindViewHolder(@NonNull AdaptadorMainMenuHolder holder, int position) {
             holder.imprimit(position);
             holder.layoutid.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), ""+position, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), ""+position, Toast.LENGTH_SHORT).show();
                 }
             });
+
+            if(posts.get(position).tipoblog==2){
+                holder.img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), ""+position, Toast.LENGTH_SHORT).show();
+                        posicionamiento = posts.get(position).urlimg;
+                        goToImg(fragmentIMG);
+                    }
+                });
+            }
+
 
         }
 
@@ -245,8 +267,9 @@ public class fragment_menu extends Fragment {
                 userid = itemView.findViewById(R.id.UserId);
                 profile = itemView.findViewById(R.id.profile);
                 img = itemView.findViewById(R.id.image);
-                youtube = itemView.findViewById(R.id.youtube_player_view);
                 layoutid = itemView.findViewById(R.id.layoutidd);
+
+                youtube = itemView.findViewById(R.id.youtube_player_view);
 
             }
 
@@ -254,14 +277,18 @@ public class fragment_menu extends Fragment {
             public void imprimit(int position) {
                 Log.e("soyunlog", "---------------_> " + position);
                 if(posts.get(position).tipoblog==1){
+                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/avatar.png?alt=media&token=f46f16c2-57e1-4f6b-9134-2636ec348bee").into(profile);
                     userid.setText(posts.get(position).nomusuario);
                     texto.setText(posts.get(position).texto);
 
                 }else if(posts.get(position).tipoblog==2){
+                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/avatar.png?alt=media&token=f46f16c2-57e1-4f6b-9134-2636ec348bee").into(profile);
                     userid.setText(posts.get(position).nomusuario);
                     Picasso.get().load(posts.get(position).urlimg).into(img);
                 }else{
+                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/avatar.png?alt=media&token=f46f16c2-57e1-4f6b-9134-2636ec348bee").into(profile);
                     userid.setText(posts.get(position).nomusuario);
+
                     youtube.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
                         @Override
                         public void onReady(@NonNull YouTubePlayer youTubePlayer) {
@@ -269,6 +296,7 @@ public class fragment_menu extends Fragment {
                             youTubePlayer.loadVideo(videoId, 0);
                         }
                     });
+
                 }
 
                 //"https://firebasestorage.googleapis.com/v0/b/artibe-7b1a9.appspot.com/o/Fotos_subidas%2Fls2897cb2282pedro%20pedrocomprimido.jpg?alt=media&token=b205a56e-657d-4aae-b0f0-d57ba600835b"

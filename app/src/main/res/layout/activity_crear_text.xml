@@ -46,7 +46,9 @@
             android:background="@color/black_default"
             android:ems="10"
             android:inputType="textPersonName"
+            android:maxLength="120"
             android:text="Name"
+
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

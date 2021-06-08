@@ -52,7 +52,19 @@ public class crearVideo extends AppCompatActivity {
 
         btnvide.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Post post = new Post(tipo,"null",Url.getText().toString(),"null",currentUser.getDisplayName().toString(),currentUser.getEmail().toString());
+
+                int p = (int) (Math.random() * 25 + 1);int s= (int) (Math.random()* 25 +1) ;
+                int t = (int) (Math.random() * 25 + 1);int c= (int) (Math.random()* 25 +1) ;
+
+                int numero1 = (int) (Math.random() * 1012 + 2111);
+                int numero2 = (int) (Math.random() * 1012 + 2111);
+
+                String[] elementos = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+
+                final String aleatorio = elementos[p] + elementos[s] +
+                        numero1 + elementos[t] + elementos[c] + numero2 + currentUser.getDisplayName().toString()+"blogtipovideo";
+
+                Post post = new Post(tipo,"null",Url.getText().toString(),"null",currentUser.getDisplayName().toString(),currentUser.getEmail().toString(),aleatorio);
                 posts.add(post);
 
                 db.setValue(posts);
